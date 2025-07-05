@@ -18,12 +18,14 @@ done
 
 echo "Enter a list of your favorite colors (space-separated):"
 read -a colors
+echo "You entered ${#colors[@]} colors."
+echo "You entered: ${colors[*]}"
 
-for word in $colors; do
+for word in ${colors[@]}; do
     length=${#word}
     number=1
     until [ "$number" -eq $length ]; do
         ((number++))
     done
-     echo "The number of colors you entered is: $number"
+     echo "The word '$word' has $number letters."
 done
