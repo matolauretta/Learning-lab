@@ -7,7 +7,7 @@ echo "Can you guess what it is?"
 while true; do
     read -p "Enter your guess: " user_guess
 
-    if [[ ! $user_guess =~ ^[1-9]$ ]]; then
+    if [[ ! $user_guess =~ ^([1-9]|10)$ ]]; then
         echo "Please enter a valid number between 1 and 10."
         continue
     fi
