@@ -1,6 +1,20 @@
 #!/bin/bash
 
-random_number=$(shuf -i 1-10 -n 1)
+# This script implements a simple random number guessing game.
+if command -v shuf >/dev/null 2>&1; then
+    SHUF_CMD="shuf"
+elif command -v gshuf >/dev/null 2>&1; then
+    SHUF_CMD="gshuf"
+else
+    SHUF_CMD=""
+fi
+
+if [ -n "$SHUF_CMD" ]; then
+    random_number=$($SHUF_CMD -i 1-10 -n 1)
+else
+    random_number=$(( ( RANDOM % 10 ) + 1 ))
+fi
+
 echo "Welcome to the random number guessing game!"
 echo "I have selected a random number between 1 and 10."    
 echo "Can you guess what it is?"
