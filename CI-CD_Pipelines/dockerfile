@@ -1,0 +1,18 @@
+# Build stage
+FROM golang:1.23.2 as builder
+
+WORKDIR /app
+COPY . .
+RUN go mod tidy
+RUN go build -o hello
+
+# Run stage
+FROM gcr.io/distroless/base-debian12
+
+WORKDIR /app
+COPY --from=builder /app/hello .
+
+ENV HELLO_MESSAGE="Hello from Docker container!"
+EXPOSE 8080
+
+CMD ["./hello"]
